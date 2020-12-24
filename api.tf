@@ -70,3 +70,10 @@ resource "aws_api_gateway_method" "my_walk_main_method" {
   http_method   = "GET"
   authorization = "NONE"
 }
+
+resource "aws_api_gateway_resource" "index_api" {
+  depends_on = [aws_api_gateway_rest_api.aws_sandbox]
+  rest_api_id = aws_api_gateway_rest_api.aws_sandbox.id
+  parent_id = aws_api_gateway_rest_api.aws_sandbox.root_resource_id
+  path_part = "api"
+}
