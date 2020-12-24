@@ -32,8 +32,12 @@ dependencies {
 wrapper {
     gradleVersion = "6.7.1"
 }
-
+//archiveFileName
 application {
     // Define the main class for the application.
-    mainClassName = 'cat.my.walks.AppKt'
+    mainClassName = 'cat.aws.sandbox.AppKt'
+}
+
+shadowJar {
+    archiveFileName = "api.jar"
 }
