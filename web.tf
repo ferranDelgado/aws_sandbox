@@ -28,26 +28,35 @@ resource "aws_s3_bucket" "frontend" {
   }
 }
 
-//resource "aws_s3_bucket_object" "index_file" {
-//  depends_on = [aws_s3_bucket.frontend]
-//  bucket = var.bucket_name
-//  key    = "index.html"
-//  source = "${path.module}/app/index.html"
-//  content_type = "text/html"
-//}
+locals {
+  src_dir      = "${path.module}/app"
+  content_type_map = {
+    html        = "text/html",
+    js          = "application/javascript",
+    css         = "text/css",
+    svg         = "image/svg+xml",
+    jpg         = "image/jpeg",
+    ico         = "image/x-icon",
+    png         = "image/png",
+    gif         = "image/gif",
+    pdf         = "application/pdf"
+  }
+}
 
-resource "aws_s3_bucket_object" "test" {
-  for_each = fileset("${path.module}/app", "**/*")
+resource "aws_s3_bucket_object" "web_s3_upload" {
+  depends_on = [aws_s3_bucket.frontend]
+  for_each = fileset(local.src_dir, "**/*")
 
   bucket = var.bucket_name
   key    = each.value
   source = "${path.module}/app/${each.value}"
   // content_type = "text/html"
+  content_type  = lookup(local.content_type_map, regex("\\.(?P<extension>[A-Za-z0-9]+)$", each.value).extension, "application/octet-stream")
 }
 
 
 resource "aws_cloudfront_distribution" "frontend" {
-  depends_on = [aws_s3_bucket_object.test ]
+  depends_on = [aws_s3_bucket_object.web_s3_upload]
   origin {
     domain_name = aws_s3_bucket.frontend.bucket_domain_name
     origin_id   = var.bucket_name
@@ -91,6 +100,10 @@ output "fileset-results" {
 
 output "bucket_domain" {
   value = aws_s3_bucket.frontend.bucket_domain_name
+}
+
+output "static_web" {
+  value = aws_cloudfront_distribution.frontend.domain_name
 }
 
 
