@@ -3,21 +3,27 @@
  */
 package cat.aws.sandbox
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.InputStream
 import java.io.OutputStream
+import java.time.Instant
 
 val mapper = jacksonObjectMapper()
 
-data class HandlerInput(val name: String)
-data class ResponseBody(val message: String)
-data class ResponseHeader(val myHeader: String = "my_value")
+data class ResponseBody(val message: String, val instant: Instant = Instant.now()) {
+    fun json(): String = mapper.writeValueAsString(this)
+}
+data class ResponseHeader(val myHeader: String = "my_value", @JsonProperty("Access-Control-Allow-Origin") val accessControlAllowOrigin: String = "*")
+
 data class HandlerOutput(
     val statusCode: Int = 200,
     val body: String,
     val headers: ResponseHeader = ResponseHeader(),
     val isBase64Encoded: Boolean = false
-)
+) {
+    constructor(body: ResponseBody) : this(body = body.json())
+}
 
 /*
 * var response = {
@@ -35,7 +41,7 @@ class App {
             return "Hello world."
         }
 
-    val anyResponse = HandlerOutput(body = "Hello world")
+    val anyResponse = HandlerOutput(body = ResponseBody("Hello world"))
 
     fun handler(input: InputStream, output: OutputStream) {
         //val inputObj = mapper.readValue<HandlerInput>(input)

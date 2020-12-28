@@ -50,6 +50,7 @@ resource "aws_s3_bucket_object" "web_s3_upload" {
   bucket = var.bucket_name
   key    = each.value
   source = "${path.module}/app/${each.value}"
+  etag = filemd5("${path.module}/app/${each.value}")
   // content_type = "text/html"
   content_type  = lookup(local.content_type_map, regex("\\.(?P<extension>[A-Za-z0-9]+)$", each.value).extension, "application/octet-stream")
 }
