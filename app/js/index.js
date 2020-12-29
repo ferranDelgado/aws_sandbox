@@ -10,21 +10,43 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("random-number").innerHTML = (Math.random() * maxRandomValue) | 0
     }
 
-    function ajaxCall2(event) {
-        event.preventDefault()
-        const apiUrl = document.getElementById("url-input").value
-
+    function ajax(url, method, success, failure) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                document.getElementById("myDiv").innerHTML = this.responseText;
+                const jsondata = JSON.parse(this.responseText);
+                console.log(jsondata)
+                success(jsondata.message)
+                // document.getElementById("result-container").innerHTML = jsondata.message;
+            } else if(failure) {
+                failure()
             }
         };
-        xhttp.open("GET", apiUrl, true);
+        xhttp.open(method, url, true);
         xhttp.send();
-
     }
-    function ajaxCall(event) {
+
+    function postCall(event) {
+        event.preventDefault()
+        const apiUrl = document.getElementById("url-input").value
+        ajax(apiUrl, "POST", (message) => {
+            document.getElementById("result-container").innerHTML = message;
+        })
+    }
+
+    function getCall(event) {
+        event.preventDefault()
+        const apiUrl = document.getElementById("url-input").value
+        ajax(apiUrl, "GET", (message) => {
+            document.getElementById("result-container").innerHTML = message;
+        })
+    }
+
+    function ajaxCall2(event) {
+        const method = document.querySelector("input[name=call-method]:checked").value
+        console.log(method)
+    }
+    function ajaxCall2(event) {
         event.preventDefault()
         const apiUrl = document.getElementById("url-input").value
         if(apiUrl === "") {
@@ -61,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.getElementById("run-btn").addEventListener("click", generateRandom, false);
-    document.getElementById("call-btn").addEventListener("click", ajaxCall, false);
+    document.getElementById("call-btn").addEventListener("click", postCall, false);
 
     maxValueInput.addEventListener('input', (event) => {
         maxRandomValue = maxValueInput.value

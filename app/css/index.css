@@ -10,12 +10,37 @@
   text-align: center;
 }
 
+#method-selector {
+  margin-top: 15px;
+}
 .btn {
   width: 100%;
   font-size: 50px;
   margin-top: 10px;
   border-radius: 5px;
 }
+
+.radio-container {
+  width: 49%;
+  font-size: 55px;
+  display: inline-block;
+}
+
+.radio-container input {
+  visibility: hidden;
+}
+
+.radio-container label {
+  padding: 5px;
+  border: solid;
+  border-radius: 10px;
+}
+
+.radio-container input:checked + label {
+  color: red;
+}
+
+
 
 #random-number {
   width: 100%;

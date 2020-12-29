@@ -17,12 +17,25 @@
   <div>
     <button class="btn" id="run-btn"> Run!</button>
   </div>
+  <div id="method-selector">
+    <span class="radio-container">
+      <input type="radio" id="method-get" name="call-method" value="GET">
+      <label for="method-get">GET</label>
+    </span>
+    <span class="radio-container">
+      <input type="radio" id="method-post" name="call-method" value="POST">
+      <label for="method-post">POST</label>
+    </span>
+  </div>
   <div>
     <label id="url-input-label" for="url-input">Api url</label>
     <input id="url-input" type="text" value="https://3jml4durl1.execute-api.eu-west-1.amazonaws.com/my-walk-root-stage-name/api">
   </div>
   <div>
-    <button class="btn" id="call-btn"> Call!</button>
+    <button class="btn" id="call-btn"> Get call!</button>
+  </div>
+  <div>
+    <button class="btn" id="post-btn"> Post call!</button>
   </div>
   <div id="result-container">
 

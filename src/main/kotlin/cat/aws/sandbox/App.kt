@@ -41,15 +41,23 @@ class App {
             return "Hello world."
         }
 
-    val anyResponse = HandlerOutput(body = ResponseBody("Hello world"))
 
-    fun handler(input: InputStream, output: OutputStream) {
+    fun list(input: InputStream, output: OutputStream) {
         //val inputObj = mapper.readValue<HandlerInput>(input)
 //        mapper.writeValue(output, HandlerOutput("Hello ${inputObj.name}"))
+        val anyResponse = HandlerOutput(body = ResponseBody("List result"))
+        mapper.writeValue(output, anyResponse)
+    }
+
+    fun add(input: InputStream, output: OutputStream) {
+        //val inputObj = mapper.readValue<HandlerInput>(input)
+//        mapper.writeValue(output, HandlerOutput("Hello ${inputObj.name}"))
+        val anyResponse = HandlerOutput(body = ResponseBody("Adding result"))
         mapper.writeValue(output, anyResponse)
     }
 }
 
 fun main(args: Array<String>) {
-    println(mapper.writeValueAsString(App().anyResponse))
+    val anyResponse = HandlerOutput(body = ResponseBody("Hello world"))
+    println(mapper.writeValueAsString(anyResponse))
 }
