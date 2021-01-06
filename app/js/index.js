@@ -46,4 +46,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("get-btn").addEventListener("click", getCall, false);
     document.getElementById("post-btn").addEventListener("click", postCall, false);
+
+
+    document.getElementById("register-btn").addEventListener("click", registerUser, false);
+    document.getElementById("log-in-btn").addEventListener("click", login, false);
+    document.getElementById("verify-btn").addEventListener("click", verifyCode, false);
+
+
+    // document.getElementById("log-in-btn").addEventListener("click", () => {
+    //     const email = (document.getElementById("email-input").value || "").trim()
+    //     if(typeof window.appData !== 'undefined' && email.length > 0) {
+    //         window.appData.login(email,
+    //             function signinSuccess() {
+    //                 console.log('Successfully Logged In');
+    //                 document.getElementById("result-container").innerHTML = 'Successfully Logged In'
+    //             },
+    //             function signinError(err) {
+    //                 alert(err);
+    //             }
+    //         )
+    //     } else {
+    //         document.getElementById("result-container").innerHTML = "Error";
+    //     }
+    // }, false);
 }, false);
