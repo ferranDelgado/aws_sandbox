@@ -142,7 +142,7 @@ resource "aws_api_gateway_method" "root_api_post" {
   rest_api_id = aws_api_gateway_rest_api.aws_sandbox.id
   resource_id = aws_api_gateway_resource.root_api.id
   http_method = "POST"
-  authorization = "NONE"
+  authorization = "AWS_IAM"
 }
 
 resource "aws_api_gateway_integration" "root_api_post" {

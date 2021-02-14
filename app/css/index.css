@@ -1,6 +1,16 @@
 #wrapper {
-  width: 500px;
+  width: 900px;
   margin: 0 auto;
+}
+
+#wrapper-left {
+  width: 49%;
+  float: left;
+}
+
+#wrapper-right {
+  width: 49%;
+  float: right;
 }
 
 /*#max-value-input {*/
@@ -80,9 +90,9 @@
 
 #result-container {
   font-size: 50px;
-  margin-top: 10px;
   border-radius: 5px;
   border: solid;
-  height: 50px;
-  width: 99%;
+  width: 100%;
+  height: 440px;
+  margin-top: 38px;
 }

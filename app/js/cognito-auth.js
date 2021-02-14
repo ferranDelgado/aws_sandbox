@@ -42,12 +42,14 @@ window.onload = function () {
     appData.authToken.then(function setAuthToken(token) {
         if (token) {
             console.log("Token " + token)
+            appData.token = token
         } else {
             console.log("not log in")
-            // window.location.href = '/signin.html';
+            delete appData.token
         }
     }).catch(function handleTokenError(error) {
         alert(error);
+        delete appData.token
         //window.location.href = '/signin.html';
     });
 

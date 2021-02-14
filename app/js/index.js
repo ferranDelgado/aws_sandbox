@@ -1,3 +1,5 @@
+window.appData = window.appData || {}
+
 document.addEventListener('DOMContentLoaded', function () {
     const maxValueInput = document.getElementById("max-value-input");
     let maxRandomValue = 10
@@ -21,6 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
         xhttp.open(method, url, true);
+        if(typeof window.appData.token !== 'undefined') {
+            xhttp.setRequestHeader("Authorization", window.appData.token)
+            xhttp.withCredentials = true
+        }
         xhttp.send();
     }
 
@@ -52,21 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("log-in-btn").addEventListener("click", login, false);
     document.getElementById("verify-btn").addEventListener("click", verifyCode, false);
 
+    if(typeof appData.authToken !== "undefined") {
+        appData.authToken.then(function setAuthToken(token) {
+            if (token) {
+                document.getElementById("right-title").innerHTML = "Welcome"
+            } else {
+                document.getElementById("right-title").innerHTML = ""
+            }
+        })
+    }
 
-    // document.getElementById("log-in-btn").addEventListener("click", () => {
-    //     const email = (document.getElementById("email-input").value || "").trim()
-    //     if(typeof window.appData !== 'undefined' && email.length > 0) {
-    //         window.appData.login(email,
-    //             function signinSuccess() {
-    //                 console.log('Successfully Logged In');
-    //                 document.getElementById("result-container").innerHTML = 'Successfully Logged In'
-    //             },
-    //             function signinError(err) {
-    //                 alert(err);
-    //             }
-    //         )
-    //     } else {
-    //         document.getElementById("result-container").innerHTML = "Error";
-    //     }
-    // }, false);
 }, false);

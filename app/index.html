@@ -6,34 +6,38 @@
 </head>
 <body>
 <div id="wrapper">
-  <div>
-    <label class="input-label" id="url-input-label" for="url-input">Api url</label>
-    <input class="input-text" id="url-input" type="text" value="https://x2dwzt99ig.execute-api.eu-west-1.amazonaws.com/my-walk-root-stage-name/api">
-  </div>
-  <div>
-    <button class="btn" id="get-btn"> Get call!</button>
-  </div>
-  <div>
-    <button class="btn" id="post-btn"> Post call!</button>
-  </div>
-  <div id="result-container">
+  <div id="wrapper-left">
+    <div>
+      <label class="input-label" id="url-input-label" for="url-input">Api url</label>
+      <input class="input-text" id="url-input" type="text" value="https://x2dwzt99ig.execute-api.eu-west-1.amazonaws.com/my-walk-root-stage-name/api">
+    </div>
+    <div>
+      <button class="btn" id="get-btn"> Get call!</button>
+    </div>
+    <div>
+      <button class="btn" id="post-btn"> Post call!</button>
+    </div>
+    <div>
+      <label class="input-label" id="email-input-label" for="email-input">Security</label>
+      <input class="input-text" type="text" id="email-input"/>
+    </div>
 
-  </div>
+    <div>
+      <button class="btn btn-half" id="register-btn"> Register</button>
+      <button class="btn btn-half" id="log-in-btn"> Log in</button>
+    </div>
 
-  <div>
-    <label class="input-label" id="email-input-label" for="email-input">Security</label>
-    <input class="input-text" type="text" id="email-input"/>
+    <div>
+      <label class="input-label" id="code-input-label" for="code-input">Verification code</label>
+      <input class="input-text" type="text" id="code-input"/>
+      <button class="btn btn-half" id="verify-btn"> Verify</button>
+    </div>
   </div>
+  <div id="wrapper-right">
+    <label id='right-title' class="input-label"></label>
+    <div id="result-container">
 
-  <div>
-    <button class="btn btn-half" id="register-btn"> Register</button>
-    <button class="btn btn-half" id="log-in-btn"> Log in</button>
-  </div>
-
-  <div>
-    <label class="input-label" id="code-input-label" for="code-input">Verification code</label>
-    <input class="input-text" type="text" id="code-input"/>
-    <button class="btn btn-half" id="verify-btn"> Verify</button>
+    </div>
   </div>
 </div>
 
