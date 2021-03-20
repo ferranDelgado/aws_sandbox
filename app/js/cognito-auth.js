@@ -4,8 +4,8 @@ const appData = window.appData
 window.onload = function () {
     console.log("windows loaded")
     const poolData = {
-        UserPoolId: 'eu-west-1_DopT4TPns',
-        ClientId: '5bk18ktmagv5vgfeit8q98ivma'
+        UserPoolId: 'eu-west-1_4nb0ZbcLB',
+        ClientId: '2v98hu6lvaqpkijmv6na8n9ncg'
     };
 
     const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
